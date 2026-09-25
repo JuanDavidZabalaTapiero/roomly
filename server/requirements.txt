@@ -1,0 +1,21 @@
+# API
+fastapi==0.141.1
+
+# Levantar servidor backend
+uvicorn==0.52.4
+
+# Variables de entorno
+python-dotenv==1.2.3
+
+# === DB ===
+# ORM
+SQLAlchemy==2.0.52
+
+# Driver de conexión entre Python y PostgreSQL
+psycopg[binary]
+
+# Migraciones
+alembic==1.19.1
+
+# === TESTS ===
+pytest==9.1.1
