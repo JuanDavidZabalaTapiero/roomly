@@ -1,14 +1,18 @@
-# Roomly
+# 📋 Roomly
 
 Aplicación de reserva de salas
 
-# Tecnologías
+---
+
+# ⚙️ Tecnologías
 
 - DB: PostgreSQL
 - Frontend: React
 - Backend: FastAPI
 
-# React
+---
+
+# ⚛️ React
 
 Carpeta `client`
 
@@ -18,7 +22,15 @@ Instalar dependencias:
 npm install
 ```
 
-# FastAPI
+Levantar servicio:
+
+```bash
+npm run dev
+```
+
+---
+
+# 🐍 FastAPI
 
 Carpeta `server`
 
