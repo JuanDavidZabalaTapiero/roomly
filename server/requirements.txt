@@ -7,6 +7,9 @@ uvicorn==0.52.4
 # Variables de entorno
 python-dotenv==1.2.3
 
+# Validación formato email
+email-validator==2.3.0
+
 # === DB ===
 # ORM
 SQLAlchemy==2.0.52

@@ -66,3 +66,17 @@ alembic upgrade head
 ```
 
 > La base de datos debe estar activa antes de ejecutar las migraciones.
+
+## Ejecutar backend
+
+Iniciar el servidor de desarrollo:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+## Documentación
+
+La documentación interactiva de Swagger está disponible en:
+
+http://127.0.0.1:8000/docs
