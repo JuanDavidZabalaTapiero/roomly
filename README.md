@@ -22,6 +22,16 @@ Instalar dependencias:
 npm install
 ```
 
+## Variables de entorno
+
+Crear un archivo `.env` en `client`:
+
+```env
+VITE_API_URL=http://127.0.0.1:8000
+```
+
+## Ejecutar frontend
+
 Iniciar servidor de desarrollo:
 
 ```bash

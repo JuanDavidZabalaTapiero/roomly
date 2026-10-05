@@ -6,9 +6,19 @@ from app.handlers import (
     sqlalchemy_error_handler,
 )
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import SQLAlchemyError
 
 app = FastAPI()
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Error Handlers
 app.add_exception_handler(AppError, app_error_handler)
