@@ -1,5 +1,5 @@
 from app.core.security import create_access_token
-from app.dependencies.user import get_user_service
+from app.dependencies.user import get_current_user, get_user_service
 from app.schemas.user import (
     TokenResponse,
     UserCreate,
@@ -16,6 +16,11 @@ router = APIRouter(prefix="/api/users")
 def login(data: UserLogin, service=Depends(get_user_service)):
     user = service.authenticate(data.email, data.password)
     return {"access_token": create_access_token(user.id), "token_type": "bearer"}
+
+
+@router.get("/me", response_model=UserResponse)
+def get_me(current_user=Depends(get_current_user)):
+    return current_user
 
 
 @router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
