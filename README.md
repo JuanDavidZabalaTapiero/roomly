@@ -63,6 +63,7 @@ Crear un archivo `.env` en `server`:
 
 ```env
 DATABASE_URL=postgresql+psycopg://user:password@host:port/db_name
+SECRET_KEY=una-clave-secreta-larga-y-aleatoria
 ```
 
 ## Migraciones
