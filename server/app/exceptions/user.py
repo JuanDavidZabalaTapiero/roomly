@@ -11,3 +11,9 @@ class UserEmailAlreadyExistsError(AppError):
     default_message = "El email ya está registrado"
     status_code = 409
     code = "USER_EMAIL_ALREADY_EXISTS"
+
+
+class InvalidCredentialsError(AppError):
+    default_message = "Email o contraseña incorrectos"
+    status_code = 401
+    code = "INVALID_CREDENTIALS"

@@ -1,8 +1,13 @@
 from app.dependencies.user import get_user_service
-from app.schemas.user import UserCreate, UserResponse, UserUpdate
+from app.schemas.user import UserCreate, UserLogin, UserResponse, UserUpdate
 from fastapi import APIRouter, Depends, status
 
 router = APIRouter(prefix="/api/users")
+
+
+@router.post("/login", response_model=UserResponse)
+def login(data: UserLogin, service=Depends(get_user_service)):
+    return service.authenticate(data.email, data.password)
 
 
 @router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
