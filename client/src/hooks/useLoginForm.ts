@@ -16,7 +16,7 @@ export function useLoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,7 +46,7 @@ export function useLoginForm() {
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setAccessToken(null);
+    setSuccess(false);
 
     if (!validate()) return;
 
@@ -54,7 +54,11 @@ export function useLoginForm() {
 
     try {
       const response = await loginUser(formData);
-      setAccessToken(response.access_token);
+
+      // Guardar token
+      sessionStorage.setItem("access_token", response.access_token);
+
+      setSuccess(true);
     } catch (error) {
       setError(
         error instanceof Error
@@ -71,7 +75,7 @@ export function useLoginForm() {
     loading,
     error,
     validationErrors,
-    accessToken,
+    success,
     handleChange,
     handleSubmit,
   };

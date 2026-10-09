@@ -6,7 +6,7 @@ export function LoginForm() {
     loading,
     error,
     validationErrors,
-    accessToken,
+    success,
     handleChange,
     handleSubmit,
   } = useLoginForm();
@@ -16,7 +16,7 @@ export function LoginForm() {
       <h2>Iniciar sesión</h2>
 
       {error && <div>{error}</div>}
-      {accessToken && <div>¡Inicio de sesión exitoso!</div>}
+      {success && <div>¡Inicio de sesión exitoso!</div>}
 
       <div>
         <label htmlFor="email">Email</label>
