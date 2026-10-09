@@ -5,8 +5,9 @@ function Layout() {
     <>
       <header>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/users">Usuarios</Link>
+          <Link to="/">Inicio</Link>
+          <Link to="/login">Iniciar sesión</Link>
+          <Link to="/register">Registrarse</Link>
         </nav>
       </header>
 

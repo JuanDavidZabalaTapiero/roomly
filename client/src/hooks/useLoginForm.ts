@@ -1,27 +1,23 @@
 import { useState } from "react";
 import type { ChangeEvent, SubmitEvent } from "react";
-import { createUser } from "../api/user";
+import { loginUser } from "../api/user";
 
 type FormErrors = {
-  name?: string;
   email?: string;
   password?: string;
 };
 
-export function useCreateUserForm() {
-  // Variables
+export function useLoginForm() {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  // Manejar cambio en input
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -30,13 +26,8 @@ export function useCreateUserForm() {
     }));
   };
 
-  // Validación
   const validate = (): boolean => {
     const errors: FormErrors = {};
-
-    if (!formData.name.trim()) {
-      errors.name = "El nombre es obligatorio.";
-    }
 
     if (!formData.email.trim()) {
       errors.email = "El email es obligatorio.";
@@ -44,34 +35,31 @@ export function useCreateUserForm() {
       errors.email = "Ingresa un correo electrónico válido.";
     }
 
-    if (formData.password.length < 8) {
-      errors.password = "La contraseña debe tener al menos 8 caracteres.";
+    if (!formData.password) {
+      errors.password = "La contraseña es obligatoria.";
     }
 
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
-  // Llamada a API
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setSuccess(false);
+    setAccessToken(null);
 
     if (!validate()) return;
 
     setLoading(true);
 
     try {
-      await createUser(formData);
-      setSuccess(true);
-      setFormData({ name: "", email: "", password: "" });
-      setValidationErrors({});
+      const response = await loginUser(formData);
+      setAccessToken(response.access_token);
     } catch (error) {
       setError(
         error instanceof Error
           ? error.message
-          : "Ocurrió un error al intentar crear el usuario",
+          : "Ocurrió un error al intentar iniciar sesión",
       );
     } finally {
       setLoading(false);
@@ -82,8 +70,8 @@ export function useCreateUserForm() {
     formData,
     loading,
     error,
-    success,
     validationErrors,
+    accessToken,
     handleChange,
     handleSubmit,
   };

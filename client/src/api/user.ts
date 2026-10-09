@@ -1,5 +1,15 @@
 import { request } from "./api";
 
+type LoginInput = {
+  email: string;
+  password: string;
+};
+
+type TokenResponse = {
+  access_token: string;
+  token_type: "bearer";
+};
+
 type CreateUserInput = {
   name: string;
   email: string;
@@ -14,6 +24,23 @@ type User = {
   created_at: string;
 };
 
+// Auth
+export function loginUser(credentials: LoginInput): Promise<TokenResponse> {
+  return request<TokenResponse>("/api/users/login", {
+    method: "POST",
+    body: JSON.stringify(credentials),
+  });
+}
+
+export function getMe(accessToken: string): Promise<User> {
+  return request<User>("/api/users/me", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+// CRUD
 export function createUser(user: CreateUserInput): Promise<User> {
   return request<User>("/api/users/", {
     method: "POST",
