@@ -91,3 +91,11 @@ uvicorn app.main:app --reload
 La documentación interactiva de Swagger está disponible en:
 
 http://127.0.0.1:8000/docs
+
+## Autenticación
+
+La aplicación permite registrar usuarios e iniciar sesión. El login devuelve un token JWT válido durante 30 minutos. Las rutas protegidas validan el token enviado como Bearer.
+
+- Registro: `POST /api/users/`
+- Inicio de sesión: `POST /api/users/login`
+- Usuario autenticado: `GET /api/users/me`
