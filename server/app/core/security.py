@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import jwt
 from config import ALGORITHM, SECRET_KEY
@@ -16,7 +16,7 @@ def verify_password(plain_password, hashed_password):
 
 
 def create_access_token(user_id):
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=30)
+    expires_at = datetime.now(UTC) + timedelta(minutes=30)
     payload = {"sub": str(user_id), "exp": expires_at}
 
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
