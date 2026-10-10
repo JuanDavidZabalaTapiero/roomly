@@ -1,4 +1,4 @@
-import { CreateUserForm } from "../components/CreateUserForm";
+import { CreateUserForm } from "../../components/auth/CreateUserForm";
 
 function Register() {
   return <CreateUserForm />;

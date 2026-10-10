@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router";
 import Layout from "./components/Layout";
-import DashboardLayout from "./components/DashboardLayout";
+import DashboardLayout from "./components/dashboard/DashboardLayout";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import Dashboard from "./pages/dashboard/Dashboard";
 import NotFound from "./pages/NotFound";
-import DashboardNotFound from "./pages/DashboardNotFound";
+import DashboardNotFound from "./pages/dashboard/DashboardNotFound";
 
 function App() {
   return (

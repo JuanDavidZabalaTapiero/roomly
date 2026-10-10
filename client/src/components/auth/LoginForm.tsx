@@ -1,35 +1,20 @@
-import { useCreateUserForm } from "../hooks/useCreateUserForm";
+import { useLoginForm } from "../../hooks/useLoginForm";
 
-export function CreateUserForm() {
+export function LoginForm() {
   const {
     formData,
     loading,
     error,
-    success,
     validationErrors,
     handleChange,
     handleSubmit,
-  } = useCreateUserForm();
+  } = useLoginForm();
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Registro de Usuario</h2>
-
-      {success && <div>¡Usuario creado exitosamente!</div>}
+      <h2>Iniciar sesión</h2>
 
       {error && <div>{error}</div>}
-
-      <div>
-        <label htmlFor="name">Nombre</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        {validationErrors.name && <span>{validationErrors.name}</span>}
-      </div>
 
       <div>
         <label htmlFor="email">Email</label>
@@ -56,7 +41,7 @@ export function CreateUserForm() {
       </div>
 
       <button type="submit" disabled={loading}>
-        {loading ? "Guardando..." : "Registrarse"}
+        {loading ? "Iniciando sesión..." : "Iniciar sesión"}
       </button>
     </form>
   );

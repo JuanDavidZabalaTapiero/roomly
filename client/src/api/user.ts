@@ -1,4 +1,5 @@
 import { request } from "./api";
+import type { User } from "../types/user";
 
 type LoginInput = {
   email: string;
@@ -14,14 +15,6 @@ type CreateUserInput = {
   name: string;
   email: string;
   password: string;
-};
-
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  role: "USER" | "ADMIN";
-  created_at: string;
 };
 
 // Auth
