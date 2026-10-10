@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ChangeEvent, SubmitEvent } from "react";
+import { useNavigate } from "react-router";
 import { loginUser } from "../api/user";
 
 type FormErrors = {
@@ -8,6 +9,8 @@ type FormErrors = {
 };
 
 export function useLoginForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -16,7 +19,6 @@ export function useLoginForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
-  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,7 +48,6 @@ export function useLoginForm() {
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setSuccess(false);
 
     if (!validate()) return;
 
@@ -58,7 +59,8 @@ export function useLoginForm() {
       // Guardar token
       sessionStorage.setItem("access_token", response.access_token);
 
-      setSuccess(true);
+      // Redireccionamiento
+      navigate("/dashboard", { replace: true });
     } catch (error) {
       setError(
         error instanceof Error
@@ -75,7 +77,6 @@ export function useLoginForm() {
     loading,
     error,
     validationErrors,
-    success,
     handleChange,
     handleSubmit,
   };

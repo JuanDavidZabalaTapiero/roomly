@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import DashboardNotFound from "./pages/DashboardNotFound";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="*" element={<DashboardNotFound />} />
       </Route>
     </Routes>
   );
