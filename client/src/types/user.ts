@@ -2,6 +2,6 @@ export type User = {
   id: number;
   name: string;
   email: string;
-  role: "USER" | "ADMIN";
+  role: "user" | "admin";
   created_at: string;
 };

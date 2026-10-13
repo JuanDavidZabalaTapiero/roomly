@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, Enum, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
@@ -16,8 +16,12 @@ class Reservation(Base):
     start_datetime: Mapped[datetime] = mapped_column(DateTime)
     end_datetime: Mapped[datetime] = mapped_column(DateTime)
     status: Mapped[ReservationStatus] = mapped_column(
-        Enum(ReservationStatus), default=ReservationStatus.CONFIRMED
+        Enum(
+            ReservationStatus,
+            values_callable=lambda enum_type: [member.value for member in enum_type],
+        ),
+        default=ReservationStatus.CONFIRMED,
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime, default=lambda: datetime.now(timezone.utc)
+        DateTime, default=lambda: datetime.now(UTC)
     )

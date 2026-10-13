@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, Enum, String
 from sqlalchemy.orm import Mapped, mapped_column
@@ -14,7 +14,13 @@ class User(Base):
     name: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(255), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255))
-    role: Mapped[UserRole] = mapped_column(Enum(UserRole), default=UserRole.USER)
+    role: Mapped[UserRole] = mapped_column(
+        Enum(
+            UserRole,
+            values_callable=lambda enum_type: [member.value for member in enum_type],
+        ),
+        default=UserRole.USER,
+    )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime, default=lambda: datetime.now(timezone.utc)
+        DateTime, default=lambda: datetime.now(UTC)
     )

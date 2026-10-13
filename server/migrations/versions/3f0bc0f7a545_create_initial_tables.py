@@ -1,8 +1,8 @@
 """create initial tables
 
-Revision ID: 77fd53d21df3
+Revision ID: 3f0bc0f7a545
 Revises:
-Create Date: 2026-09-29 18:28:28.557991
+Create Date: 2026-10-13 15:51:01.744538
 
 """
 
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = "77fd53d21df3"
+revision: str = "3f0bc0f7a545"
 down_revision: str | Sequence[str] | None = None
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
@@ -38,7 +38,7 @@ def upgrade() -> None:
         sa.Column("name", sa.String(length=100), nullable=False),
         sa.Column("email", sa.String(length=255), nullable=False),
         sa.Column("password_hash", sa.String(length=255), nullable=False),
-        sa.Column("role", sa.Enum("USER", "ADMIN", name="userrole"), nullable=False),
+        sa.Column("role", sa.Enum("user", "admin", name="userrole"), nullable=False),
         sa.Column("created_at", sa.DateTime(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("email"),
@@ -52,7 +52,7 @@ def upgrade() -> None:
         sa.Column("end_datetime", sa.DateTime(), nullable=False),
         sa.Column(
             "status",
-            sa.Enum("CONFIRMED", "CANCELLED", "COMPLETED", name="reservationstatus"),
+            sa.Enum("confirmed", "cancelled", "completed", name="reservationstatus"),
             nullable=False,
         ),
         sa.Column("created_at", sa.DateTime(), nullable=False),

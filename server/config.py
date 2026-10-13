@@ -8,6 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+TEST_DATABASE_URL = os.getenv("TEST_DATABASE_URL")
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
 
