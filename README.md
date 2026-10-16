@@ -8,6 +8,8 @@ Aplicación web para la gestión y reserva de salas.
 - **Frontend:** React
 - **Backend:** FastAPI
 
+---
+
 ## ⚛️ Frontend (React)
 
 Trabajar desde el directorio `client/`.
@@ -109,6 +111,8 @@ Luego, ejecutar las pruebas desde `server/`:
 ```bash
 python -m pytest -v
 ```
+
+---
 
 ## 🐳 Docker
 
