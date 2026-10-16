@@ -10,20 +10,28 @@ Aplicación web para la gestión y reserva de salas.
 
 ## ⚛️ Frontend (React)
 
-Desde la raíz del proyecto, entra en `client/` e instala las dependencias:
+Trabajar desde el directorio `client/`.
 
-```bash
+### 📦 Instalar dependencias
+
+Desde la raíz del proyecto, entrar en `client/` e instalar las dependencias:
+
+```powershell
 cd client
 npm install
 ```
 
-Crea `client/.env` con la URL de la API:
+### ⚙️ Configurar variables de entorno
+
+Crear `client/.env` con la URL de la API:
 
 ```env
 VITE_API_URL=http://127.0.0.1:8000
 ```
 
-Inicia el servidor de desarrollo desde `client/`:
+### 🚀 Iniciar el servidor de desarrollo
+
+Desde `client/`, iniciar Vite:
 
 ```bash
 npm run dev
@@ -31,18 +39,26 @@ npm run dev
 
 Vite estará disponible en [http://localhost:5173](http://localhost:5173).
 
+---
+
 ## 🐍 Backend (FastAPI)
 
-Desde la raíz del proyecto, entra en `server/`, crea un entorno virtual e instala las dependencias:
+Trabajar desde el directorio `server/`.
+
+### 📦 Crear entorno e instalar dependencias
+
+Desde la raíz del proyecto, entrar en `server/`, crear un entorno virtual, activarlo e instalar las dependencias:
 
 ```powershell
 cd server
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.\.venv\Scripts\activate
 python -m pip install -r requirements.txt
 ```
 
-Crea `server/.env` con la URL de PostgreSQL y una clave secreta:
+### ⚙️ Configurar variables de entorno
+
+Crear `server/.env` con las URL de las bases de datos y la clave secreta:
 
 ```env
 DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/roomly
@@ -50,10 +66,19 @@ TEST_DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/roomly_test
 SECRET_KEY=una-clave-secreta-larga-y-aleatoria
 ```
 
-Crea la base de datos `roomly` en PostgreSQL. Desde `server/`, aplica las migraciones e inicia FastAPI:
+### 🗃️ Crear la base de datos y aplicar migraciones
+
+Crear la base de datos `roomly` en PostgreSQL. Desde `server/`, aplicar las migraciones:
 
 ```bash
 alembic upgrade head
+```
+
+### 🚀 Iniciar FastAPI
+
+Desde `server/`, iniciar la API:
+
+```bash
 uvicorn app.main:app --reload
 ```
 
@@ -69,9 +94,9 @@ El login devuelve un JWT válido durante 30 minutos. Las rutas protegidas espera
 
 ## 🧪 Pruebas del backend
 
-Las pruebas usan una base separada llamada `roomly_test`. Créala en PostgreSQL y configura `TEST_DATABASE_URL` en `server/.env`. **No uses la base de desarrollo para ejecutar las pruebas.**
+Las pruebas usan una base separada llamada `roomly_test`. Crear esta base en PostgreSQL y configurar `TEST_DATABASE_URL` en `server/.env`. **No usar la base de desarrollo para ejecutar las pruebas.**
 
-Desde `server/`, aplica las migraciones a la base de pruebas. En PowerShell:
+Desde `server/`, aplicar las migraciones a la base de pruebas. En PowerShell:
 
 ```powershell
 $env:DATABASE_URL = "postgresql+psycopg://user:password@localhost:5432/roomly_test"
@@ -79,7 +104,7 @@ alembic upgrade head
 Remove-Item Env:DATABASE_URL
 ```
 
-Luego ejecuta los tests desde `server/`:
+Luego, ejecutar las pruebas desde `server/`:
 
 ```bash
 python -m pytest -v
@@ -87,9 +112,9 @@ python -m pytest -v
 
 ## 🐳 Docker
 
-### Instalar servicios
+### Iniciar servicios
 
-Desde la raíz del proyecto, inicia PostgreSQL, pgAdmin y la API:
+Desde la raíz del proyecto, iniciar PostgreSQL, pgAdmin y la API:
 
 ```bash
 docker compose up -d --build
@@ -118,7 +143,7 @@ Gestor visual para PostgreSQL.
 - **Email:** `admin@example.com`
 - **Password:** `admin`
 
-Al abrirlo, agrega un nuevo servidor con los datos del motor de PostgreSQL:
+Al abrir pgAdmin, agregar un nuevo servidor con los datos del motor de PostgreSQL:
 
 - **Name:** `Roomly local`
 - **Host name/address:** `postgres`
@@ -127,7 +152,7 @@ Al abrirlo, agrega un nuevo servidor con los datos del motor de PostgreSQL:
 - **Username:** `postgres`
 - **Password:** `postgres`
 
-> Recuerda que estos valores deben coincidir con los configurados en `compose.yaml`.
+> Asegurar que estos valores coincidan con los configurados en `compose.yaml`.
 
 #### ⚡ API (FastAPI)
 
@@ -138,7 +163,7 @@ El servicio construye la imagen desde `server/Dockerfile` y publica la API en [h
 - **DATABASE_URL:** `postgresql+psycopg://postgres:postgres@postgres:5432/roomly_db`
 - **SECRET_KEY:** `cambia-esto-por-una-clave-larga-y-aleatoria`
 
-Una vez iniciado el servicio y disponible PostgreSQL con la base creada, ejecuta las migraciones desde la raíz del proyecto:
+Una vez iniciado el servicio y disponible PostgreSQL con la base creada, aplicar las migraciones desde la raíz del proyecto:
 
 ```bash
 docker compose run --rm api alembic upgrade head
@@ -146,13 +171,13 @@ docker compose run --rm api alembic upgrade head
 
 La red entre servicios se crea automáticamente. Por eso la API y pgAdmin usan `postgres` como host para conectarse a la base.
 
-Para detener los servicios sin borrar los datos:
+Detener los servicios sin borrar los datos:
 
 ```bash
 docker compose down
 ```
 
-Para borrar también el volumen y los datos de PostgreSQL:
+Eliminar también el volumen y los datos de PostgreSQL:
 
 ```bash
 docker compose down -v
