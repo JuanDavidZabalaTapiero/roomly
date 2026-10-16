@@ -16,10 +16,9 @@ Trabajar desde el directorio `client/`.
 
 ### 📦 Instalar dependencias
 
-Desde la raíz del proyecto, entrar en `client/` e instalar las dependencias:
+Instalar las dependencias:
 
 ```powershell
-cd client
 npm install
 ```
 
@@ -33,7 +32,7 @@ VITE_API_URL=http://127.0.0.1:8000
 
 ### 🚀 Iniciar el servidor de desarrollo
 
-Desde `client/`, iniciar Vite:
+Iniciar Vite:
 
 ```bash
 npm run dev
@@ -49,10 +48,9 @@ Trabajar desde el directorio `server/`.
 
 ### 📦 Crear entorno e instalar dependencias
 
-Desde la raíz del proyecto, entrar en `server/`, crear un entorno virtual, activarlo e instalar las dependencias:
+Crear un entorno virtual, activarlo e instalar las dependencias:
 
 ```powershell
-cd server
 python -m venv .venv
 .\.venv\Scripts\activate
 python -m pip install -r requirements.txt
@@ -70,7 +68,7 @@ SECRET_KEY=una-clave-secreta-larga-y-aleatoria
 
 ### 🗃️ Crear la base de datos y aplicar migraciones
 
-Crear la base de datos `roomly` en PostgreSQL. Desde `server/`, aplicar las migraciones:
+Crear la base de datos `roomly` en PostgreSQL y aplicar las migraciones:
 
 ```bash
 alembic upgrade head
@@ -78,7 +76,7 @@ alembic upgrade head
 
 ### 🚀 Iniciar FastAPI
 
-Desde `server/`, iniciar la API:
+Iniciar la API:
 
 ```bash
 uvicorn app.main:app --reload
