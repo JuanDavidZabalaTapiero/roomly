@@ -59,8 +59,8 @@ export function useLoginForm() {
       // Guardar token
       sessionStorage.setItem("access_token", response.access_token);
 
-      // Redireccionamiento
-      navigate("/dashboard", { replace: true });
+      // Redireccionamiento al home
+      navigate("/", { replace: true });
     } catch (error) {
       setError(
         error instanceof Error

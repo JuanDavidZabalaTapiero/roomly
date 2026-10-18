@@ -15,8 +15,10 @@ export function useCurrentUser() {
       const token = sessionStorage.getItem("access_token");
 
       if (!token) {
-        navigate("/", { replace: true });
-        setLoading(false);
+        if (active) {
+          setUser(null);
+          setLoading(false);
+        }
         return;
       }
 
@@ -25,7 +27,7 @@ export function useCurrentUser() {
         if (active) setUser(currentUser);
       } catch {
         sessionStorage.removeItem("access_token");
-        if (active) navigate("/", { replace: true });
+        if (active) setUser(null);
       } finally {
         if (active) setLoading(false);
       }
