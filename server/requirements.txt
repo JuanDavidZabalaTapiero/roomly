@@ -27,3 +27,4 @@ alembic==1.19.1
 
 # === TESTS ===
 pytest==9.1.1
+httpx2==2.14.0
