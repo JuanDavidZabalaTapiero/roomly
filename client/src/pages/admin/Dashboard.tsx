@@ -1,5 +1,12 @@
+import UsersTable from "../../components/admin/UsersTable";
+
 function Dashboard() {
-  return <h1>Bienvenido admin</h1>;
+  return (
+    <section>
+      <h2>Usuarios registrados</h2>
+      <UsersTable />
+    </section>
+  );
 }
 
 export default Dashboard;

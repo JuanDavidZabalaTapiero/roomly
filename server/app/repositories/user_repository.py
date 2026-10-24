@@ -10,6 +10,10 @@ class UserRepository:
         self.db.add(user)
         return user
 
+    def get_all(self):
+        stmt = select(User).order_by(User.id)
+        return self.db.scalars(stmt).all()
+
     def get_by_id(self, id):
         return self.db.get(User, id)
 

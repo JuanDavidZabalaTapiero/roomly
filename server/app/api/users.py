@@ -28,6 +28,11 @@ def create(data: UserCreate, service=Depends(get_user_service)):
     return service.create(data)
 
 
+@router.get("/", response_model=list[UserResponse])
+def get_all(service=Depends(get_user_service)):
+    return service.get_all()
+
+
 @router.get("/{user_id}", response_model=UserResponse)
 def get(user_id: int, service=Depends(get_user_service)):
     return service.get_by_id(user_id)

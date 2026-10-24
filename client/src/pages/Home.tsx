@@ -1,5 +1,5 @@
 import { Navigate } from "react-router";
-import { useCurrentUser } from "../hooks/useCurrentUser";
+import { useCurrentUser } from "../hooks/auth/useCurrentUser";
 
 function Home() {
   const { user, loading } = useCurrentUser();

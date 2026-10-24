@@ -1,4 +1,4 @@
-import { useLoginForm } from "../../hooks/useLoginForm";
+import { useLoginForm } from "../../hooks/auth/useLoginForm";
 
 export function LoginForm() {
   const {

@@ -17,6 +17,12 @@ type CreateUserInput = {
   password: string;
 };
 
+type UpdateUserInput = {
+  name: string;
+  email: string;
+  role: User["role"];
+};
+
 // Auth
 export function loginUser(credentials: LoginInput): Promise<TokenResponse> {
   return request<TokenResponse>("/api/users/login", {
@@ -43,4 +49,15 @@ export function createUser(user: CreateUserInput): Promise<User> {
 
 export function getUser(id: number): Promise<User> {
   return request<User>(`/api/users/${id}`);
+}
+
+export function getAllUsers(): Promise<User[]> {
+  return request<User[]>("/api/users/");
+}
+
+export function updateUser(id: number, user: UpdateUserInput): Promise<User> {
+  return request<User>(`/api/users/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(user),
+  });
 }

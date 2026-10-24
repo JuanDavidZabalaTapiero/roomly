@@ -49,6 +49,9 @@ class UserService:
 
         return user
 
+    def get_all(self):
+        return self.repository.get_all()
+
     def get_by_id(self, user_id):
         return self._get_user_or_raise(user_id)
 
@@ -66,6 +69,7 @@ class UserService:
         # Actualizar campos
         user.name = data.name
         user.email = data.email
+        user.role = data.role
 
         self.db.commit()
 

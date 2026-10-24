@@ -9,8 +9,9 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/admin/Dashboard";
 import UserHome from "./pages/user/UserHome";
+import Dashboard from "./pages/admin/Dashboard";
+import EditUserPage from "./pages/admin/EditUserPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Route element={<RequireAuth role="admin" />}>
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
+          <Route path="users/:userId/edit" element={<EditUserPage />} />
         </Route>
       </Route>
     </Routes>

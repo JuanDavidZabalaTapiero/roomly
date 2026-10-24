@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { useCurrentUser } from "../../hooks/auth/useCurrentUser";
 import type { User } from "../../types/user";
 
 type RequireAuthProps = {

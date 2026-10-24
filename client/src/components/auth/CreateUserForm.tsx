@@ -1,4 +1,4 @@
-import { useCreateUserForm } from "../../hooks/useCreateUserForm";
+import { useCreateUserForm } from "../../hooks/users/useCreateUserForm";
 
 export function CreateUserForm() {
   const {
