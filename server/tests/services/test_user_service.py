@@ -1,4 +1,5 @@
 import pytest
+from app.db.models.enums import UserRole
 from app.exceptions.user import UserEmailAlreadyExistsError, UserNotFoundError
 from app.schemas.user import UserCreate, UserUpdate
 from app.services.user_service import UserService
@@ -59,7 +60,7 @@ def test_update_user_changes_name_and_email(db_session):
             password="plain-password",
         )
     )
-    data = UserUpdate(name="New Name", email="new@example.com")
+    data = UserUpdate(name="New Name", email="new@example.com", role=UserRole.USER)
 
     updated_user = service.update(user.id, data)
 
@@ -84,7 +85,7 @@ def test_update_user_allows_keeping_same_email(db_session):
 
     updated_user = service.update(
         user.id,
-        UserUpdate(name="New Name", email="same@example.com"),
+        UserUpdate(name="New Name", email="same@example.com", role=UserRole.USER),
     )
 
     assert updated_user.name == "New Name"
@@ -111,7 +112,9 @@ def test_update_user_rejects_duplicate_email(db_session):
     with pytest.raises(UserEmailAlreadyExistsError):
         service.update(
             user_to_update.id,
-            UserUpdate(name="Updated Name", email=existing_user.email),
+            UserUpdate(
+                name="Updated Name", email=existing_user.email, role=UserRole.USER
+            ),
         )
 
     unchanged_user = service.get_by_id(user_to_update.id)
@@ -125,7 +128,9 @@ def test_update_user_raises_when_user_does_not_exist(db_session):
     with pytest.raises(UserNotFoundError):
         service.update(
             9999,
-            UserUpdate(name="Updated Name", email="updated@example.com"),
+            UserUpdate(
+                name="Updated Name", email="updated@example.com", role=UserRole.USER
+            ),
         )
 
 
