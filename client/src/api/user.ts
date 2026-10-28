@@ -61,3 +61,9 @@ export function updateUser(id: number, user: UpdateUserInput): Promise<User> {
     body: JSON.stringify(user),
   });
 }
+
+export function deleteUser(id: number): Promise<void> {
+  return request<void>(`/api/users/${id}`, {
+    method: "DELETE",
+  });
+}

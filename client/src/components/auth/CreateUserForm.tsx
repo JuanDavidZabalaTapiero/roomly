@@ -16,7 +16,6 @@ export function CreateUserForm() {
       <h2>Registro de Usuario</h2>
 
       {success && <div>¡Usuario creado exitosamente!</div>}
-
       {error && <div>{error}</div>}
 
       <div>
